@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <!-- logo -->
+      <div class="logo"></div>
+      <!-- Search bar -->
+      <div class="search-bar">
+        <input
+          type="search"
+          placeholder="Search book title or author"
+          class="search"
+          id="search"
+          autocomplete="off"
+        />
+        <ul id="result"></ul>
+        <div class="search-icon">
+          <ion-icon name="search-outline"></ion-icon>
+        </div>
+      </div>
+      <!-- side bar -->
+      <div class="side-bar">
+        <a href="#btn-container">Categories</a>
+        <a href="#best-seller">Best-Sellers</a>
+        <a href="#new-arrivels">New Arrivels</a>
+        <a href="#trend">Trending</a>
+        <a href="">Login</a>
+      </div>
+    </header>
+    <div id="catgories"></div>
+    <div id="all-books"><h2>Available Books</h2></div>
+    <div id="main-container" class="main-container">
+      <div class="loading">Loading books...</div>
+    </div>
+    <div id="best-seller"></div>
+    <div id="new-arrivels"></div>
+    <div id="trend"></div>
+    
+    <footer>
+        <div class="footer-container">
+          <!-- About Section -->
+          <div class="footer-column">
+            <h5>About Us</h5>
+            <p>Our website provides variety of books based on categories,author,best seller,new arrivals and trending books</p>
+          </div>
+      
+          <!-- Quick Links Section -->
+          <div class="footer-column">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Books</a></li>
+              <li><a href="#">Cart</a></li>
+              <li><a href="#">regester</a></li>
+            </ul>
+          </div>
+      
+          <!-- social media links-->
+          <div class="footer-column">
+            <h5>Follow Us</h5>
+            <div class="social-links">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon> Facebook</a>
+                <a href="#"><ion-icon name="logo-twitter"></ion-icon> Twitter</a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon> Instagram</a>
+                <a href="#"><ion-icon name="logo-youtube"></ion-icon> YouTube</a>
+            </div>
+          </div>
+        </div>
+      
+        <!-- copy right-->
+        <div class="footer-bottom">
+          <p>&copy; 2025 Your Bookstore. All Rights Reserved.</p>
+        </div>
+      </footer>
+      <script src="./user.js"></script>
+</body>
+</html>
