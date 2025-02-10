@@ -16,7 +16,8 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background-color: #ffffff;
+  background-color:#493b32;
+  color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -127,12 +128,12 @@ header {
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  color: #333;
+  color: #fff;
   transition: color 0.3s ease;
 }
 
 .side-bar a:hover {
-  color: #007bff;
+  color: #30d417;
 }
 
 /* Responsive Design for smaller screens */
@@ -166,7 +167,7 @@ header {
   }
 
   .logo {
-    margin-bottom: 10px; /* Space between logo and search bar */
+    /* margin-bottom: 10px; Space between logo and search bar */
   }
 
   .side-bar {
@@ -227,7 +228,7 @@ header {
 
 #btn-container button {
   padding: 10px;
-  background-color: #314253;
+  background-color: #7c6659;
   color: white;
   border: none;
   border-radius: 5px;
@@ -442,6 +443,42 @@ footer {
       font-size: 14px;
   }
 }
+/* Default styles for larger screens */
+.add-to-cart {
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  font-size: 16px; /* Standard font size */
+  padding: 12px;
+  margin-top: 20px; /* Padding for larger buttons */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+/* On hover, change the background color */
+.add-to-cart:hover {
+  background-color: #218838;
+}
+
+/* For smaller screens, adjust the button size */
+@media (max-width: 768px) {
+  .add-to-cart {
+    font-size: 14px; /* Slightly smaller font size */
+    padding: 10px 15px; /* Smaller padding */
+  }
+}
+
+/* For very small screens (e.g., mobile devices), adjust for better fit */
+@media (max-width: 480px) {
+  .add-to-cart {
+    font-size: 12px; /* Even smaller font size */
+    padding: 8px 12px; /* Even smaller padding */
+    width: 100%; /* Button takes full width of the container */
+  }
+}
+
 
 
 
