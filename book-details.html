@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #book-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #book-image {
+            max-width: 300px;
+            height: auto;
+        }
+        #book-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #book-author {
+            font-size: 18px;
+            color: gray;
+        }
+        #book-description {
+            margin-top: 20px;
+            max-width: 600px;
+            text-align: center;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div id="book-detail">
+        <img id="book-image" alt="Book Image">
+        <h1 id="book-title"></h1>
+        <p id="book-author"></p>
+        <p id="book-description"></p>
+        <button id="add-to-cart">Add to Cart</button>
+    </div>
+
+    <script>
+        // Get book ID from the URL query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = parseInt(urlParams.get('id'));  // Retrieve the book ID from URL
+
+        if (isNaN(bookId)) {
+            document.getElementById('book-detail').innerHTML = '<p>No book found</p>';
+            // return;
+        }
+
+        // Load books data from localStorage
+        let books = JSON.parse(localStorage.getItem('books')) || [];
+
+        // Find the book by ID
+        let book = books.find(b => b.id === bookId);
+        console.log("book id is " + bookId);
+
+        if (book) {
+            // Display the book details
+            document.getElementById('book-image').src = book.bookImage;  // Set the book image
+            document.getElementById('book-title').textContent = book.bookTitle;  // Set the title
+            document.getElementById('book-author').textContent = `Author: ${book.bookAuthor}`;  // Set the author
+            document.getElementById('book-description').textContent = book.bookDescription || 'No description available.';  // Set the description
+        } else {
+            document.getElementById('book-detail').innerHTML = '<p>Book not found</p>';
+        }
+
+        // Add the book to cart functionality
+        document.getElementById('add-to-cart').addEventListener('click', function() {
+            addToCart(bookId);
+        });
+
+        // Function to add book to cart
+        function addToCart(bookId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let bookInCart = cart.find(item => item.id === bookId);
+            
+            if (!bookInCart) {
+                let book = books.find(b => b.id === bookId);
+                if (book) {
+                    cart.push({
+                        id: book.id,
+                        bookTitle: book.bookTitle
+                    });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    alert(`${book.bookTitle} added to cart`);
+                }
+            } else {
+                alert(`${book.bookTitle} is already in the cart.`);
+            }
+        }
+    </script>
+</body>
+</html>

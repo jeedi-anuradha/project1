@@ -8,12 +8,14 @@ async function fetchData() {
             throw new Error(response.status, response.statusText);
         }
         let books = await response.json();
-        localStorage.setItem('books', JSON.stringify(books));
+        console.log('Books Data:', books);  // Debugging line to check data
+        localStorage.setItem('books', JSON.stringify(books)); // Store the books data in localStorage
         displayData(books);
     } catch (error) {
-        console.error(error.message);
+        console.error('Error:', error.message);
     }
 }
+
 
 // Function to display categories
 function displayCategories() {
@@ -143,15 +145,21 @@ function displayData(books) {
 
     books.forEach(book => {
         let item = document.createElement('div');
+        item.classList.add('book-item'); // Add a class to easily style it or manage its events
         item.innerHTML = `
             <img src="${book.bookImage}" alt="${book.bookTitle}">
             <h3>${book.bookTitle}</h3>
             <p>Author: ${book.bookAuthor}</p>
             <button class="add-to-cart" data-product="${book.id}">Add to cart</button>
         `;
+        
+        // Add event listener to redirect to the book details page
+        item.addEventListener('click', () => {
+            window.location.href = `book-details.html?id=${book.id}`;
+        });
+    
         container.appendChild(item);
     });
-
     setupAddToCartButtons();
 }
 

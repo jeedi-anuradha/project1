@@ -249,6 +249,7 @@ header {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  cursor: pointer;
 }
 
 #best-seller h3, #new-arrivels h3, #trend h3 {
