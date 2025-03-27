@@ -16,7 +16,6 @@ async function fetchData() {
     }
 }
 
-
 // Function to display categories
 function displayCategories() {
     let books = JSON.parse(localStorage.getItem("books"));
@@ -58,9 +57,16 @@ function bestSeller() {
             <img src="${book.bookImage}" alt="${book.bookTitle}">
             <h3>${book.bookTitle}</h3>
             <p>Author: ${book.bookAuthor}</p>
+            <div class="rating-holder" data-book-id="${book.id}">  
+                ${getStars(book)} 
+            </div>
             <button class="add-to-cart" data-product="${book.id}">Add to cart</button>
         `;
         bestSellar.appendChild(rankItem);
+        setupRatingEvent(rankItem, book.id);
+        rankItem.addEventListener('click', () => {
+            window.location.href = `book-details.html?id=${book.id}`;
+        });
     });
 
     setupAddToCartButtons();
@@ -87,9 +93,16 @@ function newArrivels() {
             <img src="${book.bookImage}" alt="${book.bookTitle}">
             <h3>${book.bookTitle}</h3>
             <p>Author: ${book.bookAuthor}</p>
+            <div class="rating-holder" data-book-id="${book.id}">  
+                ${getStars(book)} 
+            </div>
             <button class="add-to-cart" data-product="${book.id}">Add to Cart</button>
         `;
         newArrivels.appendChild(newItem);
+        setupRatingEvent(newItem, book.id);
+        newItem.addEventListener('click', () => {
+            window.location.href = `book-details.html?id=${book.id}`;
+        });
     });
 
     setupAddToCartButtons();
@@ -116,9 +129,17 @@ function trending() {
             <img src="${book.bookImage}" alt="${book.bookTitle}">
             <h3>${book.bookTitle}</h3>
             <p>Author: ${book.bookAuthor}</p>
+            <div class="rating-holder" data-book-id="${book.id}">  
+                ${getStars(book)} 
+            </div>
             <button class="add-to-cart" data-product="${book.id}">Add to cart</button>
         `;
+       
         trend.appendChild(trendItem);
+        setupRatingEvent(trendItem, book.id);
+        trendItem.addEventListener('click', () => {
+            window.location.href = `book-details.html?id=${book.id}`;
+        });
     });
 
     setupAddToCartButtons();
@@ -145,13 +166,20 @@ function displayData(books) {
 
     books.forEach(book => {
         let item = document.createElement('div');
-        item.classList.add('book-item'); // Add a class to easily style it or manage its events
+        item.classList.add('book-item');
+        
         item.innerHTML = `
             <img src="${book.bookImage}" alt="${book.bookTitle}">
             <h3>${book.bookTitle}</h3>
             <p>Author: ${book.bookAuthor}</p>
+            <div class="rating-holder" data-book-id="${book.id}">  
+                ${getStars(book)} 
+            </div>
             <button class="add-to-cart" data-product="${book.id}">Add to cart</button>
         `;
+        
+        // Add rating click events
+        setupRatingEvent(item, book.id);
         
         // Add event listener to redirect to the book details page
         item.addEventListener('click', () => {
@@ -164,12 +192,10 @@ function displayData(books) {
 }
 
 // Function to update the cart display (only showing total items count)
-// let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
 function updateCartDisplay() {
     let totalItems = document.getElementById('total-items');
     let itemCount = cart.length;
-    totalItems.textContent = itemCount;  // Only show the total count of items
+    totalItems.textContent = itemCount;
 
     localStorage.setItem('cart', JSON.stringify(cart));
 }
@@ -201,7 +227,7 @@ function addToCart(bookId) {
             id: book.id,
             bookTitle: book.bookTitle
         });
-        showToast(`${book.bookTitle} added to cart`);  // Show the toast message with the book title
+        showToast(`${book.bookTitle} added to cart`); 
     }
     
     updateCartDisplay();
@@ -216,6 +242,46 @@ function setupAddToCartButtons() {
             addToCart(bookId);
         });
     });
+}
+
+// Function to get star rating display
+function getStars(book) {
+    let averageRating = book.ratings ? (book.ratings.reduce((a, b) => a + b) / book.ratings.length).toFixed(1) : 0;
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        stars += `<span class="star" data-star="${i}">${i <= averageRating ? '★' : '☆'}</span>`;
+    }
+    return stars;
+}
+
+// Set up rating event
+function setupRatingEvent(item, bookId) {
+    const ratingHolder = item.querySelector('.rating-holder');
+    if (!ratingHolder) return;
+
+    ratingHolder.addEventListener('click', (e) => {
+        if (e.target.classList.contains('star')) {
+            const selectedRating = parseInt(e.target.dataset.star);
+            rateBook(bookId, selectedRating);
+        }
+    });
+}
+
+// Function to rate a book
+function rateBook(bookId, rating) {
+    let books = JSON.parse(localStorage.getItem("books"));
+    let book = books.find(b => b.id === bookId);
+
+    // Initialize ratings array if it doesn't exist
+    if (!book.ratings) {
+        book.ratings = [];
+    }
+
+    book.ratings.push(rating);  // Add the new rating
+    localStorage.setItem('books', JSON.stringify(books)); // Update local storage
+
+    // Refresh the display to show the updated rating
+    displayData(books); 
 }
 
 // Fetch and display books based on categories, best-sellers, etc.

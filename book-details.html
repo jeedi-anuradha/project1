@@ -44,6 +44,18 @@
         button:hover {
             background-color: #218838;
         }
+        .rating-holder {
+            display: flex;
+            margin-top: 15px;
+        }
+        .star {
+            font-size: 24px;
+            cursor: pointer;
+            color: lightgray; /* Default color */
+        }
+        .star.selected {
+            color: gold; /* Color for selected stars */
+        }
     </style>
 </head>
 <body>
@@ -52,6 +64,13 @@
         <h1 id="book-title"></h1>
         <p id="book-author"></p>
         <p id="book-description"></p>
+        <div class="rating-holder" id="rating-holder">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
         <button id="add-to-cart">Add to Cart</button>
     </div>
 
@@ -62,7 +81,6 @@
 
         if (isNaN(bookId)) {
             document.getElementById('book-detail').innerHTML = '<p>No book found</p>';
-            // return;
         }
 
         // Load books data from localStorage
@@ -78,6 +96,9 @@
             document.getElementById('book-title').textContent = book.bookTitle;  // Set the title
             document.getElementById('book-author').textContent = `Author: ${book.bookAuthor}`;  // Set the author
             document.getElementById('book-description').textContent = book.bookDescription || 'No description available.';  // Set the description
+
+            // Display average rating
+            displayRating(book);
         } else {
             document.getElementById('book-detail').innerHTML = '<p>Book not found</p>';
         }
@@ -91,7 +112,7 @@
         function addToCart(bookId) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             let bookInCart = cart.find(item => item.id === bookId);
-            
+
             if (!bookInCart) {
                 let book = books.find(b => b.id === bookId);
                 if (book) {
@@ -105,6 +126,46 @@
             } else {
                 alert(`${book.bookTitle} is already in the cart.`);
             }
+        }
+
+        // Function to display average rating
+        function displayRating(book) {
+            const ratingHolder = document.getElementById('rating-holder');
+            const stars = ratingHolder.getElementsByClassName('star');
+            const averageRating = book.ratings ? (book.ratings.reduce((a, b) => a + b) / book.ratings.length).toFixed(1) : 0;
+
+            // Highlight the stars based on average rating
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].classList.remove('selected');
+                if (i < averageRating) {
+                    stars[i].classList.add('selected');
+                }
+            }
+        }
+
+        // Add click event to stars for rating
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = parseInt(this.dataset.value);
+                rateBook(bookId, rating);
+                displayRating(books.find(b => b.id === bookId)); // Refresh the displayed rating
+            });
+        });
+
+        // Function to rate the book
+        function rateBook(bookId, rating) {
+            let books = JSON.parse(localStorage.getItem('books')) || [];
+            let book = books.find(b => b.id === bookId);
+
+            // Initialize ratings array if it doesn't exist
+            if (!book.ratings) {
+                book.ratings = [];
+            }
+
+            // Add new rating and save back to localStorage
+            book.ratings.push(rating);
+            localStorage.setItem('books', JSON.stringify(books));
         }
     </script>
 </body>
