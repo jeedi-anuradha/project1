@@ -27,10 +27,10 @@ function displayCartItems() {
         `;
         cartItemsContainer.appendChild(itemElement);
 
-        totalPrice += 1;  // Assuming each book has a `price` property
+        totalPrice += book.bookPrice;  // Assuming each book has a `price` property
     });
 
-    cartTotalPriceContainer.innerHTML = `<strong>Total: $${totalPrice.toFixed(2)}</strong>`;
+    cartTotalPriceContainer.innerHTML = `<strong>Total Price: INR ${totalPrice.toFixed(2)}</strong>`;
 }
 
 // Function to remove an item from the cart
