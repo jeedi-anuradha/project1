@@ -24,7 +24,9 @@
       <div class="logo">
         <p>AV Books</p>
       </div>
-
+      <div class="menubar" onclick="toggleMenu()">
+        &#9776; <!-- Hamburger Icon (3 lines) -->
+      </div>
       <!-- Search Bar -->
       <div class="search-bar">
         <input
@@ -39,24 +41,10 @@
         </div>
       </div>
       
-      <div class="menubar" id="menu-icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          class="bi bi-list"
-          viewBox="0 0 16 16"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-          />
-        </svg>
-      </div>
+      
 
       <!-- Side Bar -->
-      <div class="side-bar" id="side-bar">
+      <div class="nav-bar" id="nav-bar">
         <span class="close-btn" id="close-btn">&times;</span>
         <a href="#btn-container">Categories</a>
         <a href="#best-seller">Best-Sellers</a>
@@ -204,71 +192,36 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      // Menu toggle functionality
-var menuIcon = document.getElementById("menu-icon");
-var sideBar = document.getElementById("side-bar");
-var closeBtn = document.getElementById("close-btn");
-var overlay = document.createElement('div');
-overlay.className = 'overlay';
-document.body.appendChild(overlay);
-
-// Toggle sidebar when menu icon is clicked
-menuIcon.addEventListener("click", function (e) {
-  e.stopPropagation();
-  sideBar.classList.add("show");
-  overlay.style.display = 'block';
-});
-
-// Close sidebar when close button is clicked
-closeBtn.addEventListener("click", function () {
-  sideBar.classList.remove("show");
-  overlay.style.display = 'none';
-});
-
-// Close sidebar when clicking on overlay
-overlay.addEventListener("click", function () {
-  sideBar.classList.remove("show");
-  overlay.style.display = 'none';
-});
-
-// Handle anchor link clicks in the sidebar
-document.querySelectorAll('.side-bar a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    
-    // Close the mobile menu
-    sideBar.classList.remove("show");
-    overlay.style.display = 'none';
-    
-    // Get the target section
-    const targetId = this.getAttribute('href');
-    if (targetId === '#') return;
-    
-    const targetSection = document.querySelector(targetId);
-    if (targetSection) {
-      // Calculate the position to scroll to (accounting for fixed header)
-      const headerHeight = document.querySelector('header').offsetHeight;
-      const targetPosition = targetSection.offsetTop - headerHeight;
       
-      // Smooth scroll to the section
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-      
-      // Update URL without page reload
-      history.pushState(null, null, targetId);
-    }
-  });
-});
+// Menu toggle functionality
+document.getElementById('close-btn').addEventListener('click', closeMenu);
 
-// Close sidebar when clicking outside of it
-document.addEventListener("click", function (event) {
-  if (!sideBar.contains(event.target) && !menuIcon.contains(event.target)) {
-    sideBar.classList.remove("show");
-    overlay.style.display = 'none';
+function toggleMenu() {
+  const navBar = document.querySelector('.nav-bar');
+  navBar.classList.toggle('show');
+}
+
+// Function to close the navigation menu when a link is clicked
+function closeMenu() {
+  const navBar = document.querySelector('.nav-bar');
+  navBar.classList.remove('show');
+}
+
+// Add event listener to close button
+document.getElementById('close-btn').addEventListener('click', closeMenu);
+
+// Optional: Close the nav bar if the user clicks outside the nav bar
+document.addEventListener('click', function(event) {
+  const navBar = document.querySelector('.nav-bar');
+  const menubar = document.querySelector('.menubar');
+  
+  // Check if the click is outside the nav bar and hamburger menu
+  if (!navBar.contains(event.target) && !menubar.contains(event.target)) {
+    navBar.classList.remove('show');
   }
 });
+
+
     </script>
   </body>
 </html>

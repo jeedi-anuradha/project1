@@ -136,12 +136,12 @@ header {
 }
 
 /* Sidebar Styling */
-.side-bar {
+.nav-bar {
   display: flex;
   gap: 15px;
 }
 
-.side-bar a {
+.nav-bar a {
   padding: 10px;
   text-decoration: none;
   font-size: 16px;
@@ -151,7 +151,7 @@ header {
   transition: background-color 0.4s ease;
 }
 
-.side-bar a:hover {
+.nav-bar a:hover {
   background-color: var(--third-color);
     padding: 10px;
     border-radius: 20px;
@@ -160,47 +160,30 @@ header {
 }
 
 .menubar {
-  display: none; /* Hidden by default on desktop */
+  display: none; /* Hide on large screens */
+  font-size: 30px;
   cursor: pointer;
-  font-size: 24px;
+  color: white;
+  
 }
-.close-btn {
+.nav-bar #close-btn{
   display: none;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
 }
+
 
 /* Responsive Design for smaller screens */
 @media (max-width: 1024px) {
   .menubar {
     display: block;
-    cursor: pointer;
-    z-index: 100; /* Show menu icon on mobile */
+    /* Show menu icon on mobile */
   }
 
-  .side-bar {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 70%;
-    height: 100vh;
-    background-color: var(--primary-color);
-    flex-direction: column;
-    padding: 60px 20px 20px;
+  .nav-bar {
+    left: -250px; /* Start off-screen */
     transition: left 0.3s ease;
-    z-index: 998;
   }
-
-  .side-bar.show {
-    left: 0;
-  }
-
-  .close-btn {
-    display: block;
-    color: white;
+  .nav-bar.show {
+    left: 0; /* Slide in when the show class is added */
   }
   header {
     padding: 15px 25px;
@@ -211,23 +194,30 @@ header {
     margin-left: auto;
     margin-right: auto;
   }
-
+  .close-btn {
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
 
 }
 
 @media (max-width: 768px) {
   /* Header - Stack elements vertically */
   header {
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     padding: 20px 20px;
   }
 
   .search-bar {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0px;
   }
-  .side-bar {
+  .nav-bar {
   position: fixed;
   top: 0;
   left: -250px; /* Start hidden off-screen */
@@ -241,17 +231,23 @@ header {
   transition: left 0.3s ease;
   z-index: 1000;
   }
-  .side-bar.show {
+  .nav-bar.show {
     left: 0; /* Slide in when shown */
   }
-  .side-bar a {
+  .nav-bar a {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: left;
   }
 
-  .side-bar a:hover {
+  .nav-bar a:hover {
     color: #0056b3;
+  }
+
+  .cart {
+    position: relative;
+    top: 0;
+    right: 0;
   }
 }
 
@@ -274,11 +270,11 @@ header {
     font-size: 18px;
   }
 
-  .side-bar a {
+  .nav-bar a {
     font-size: 12px;
   }
 
-  .side-bar a:hover {
+  .nav-bar a:hover {
     color: #003366;
   }
 }
@@ -425,7 +421,7 @@ footer {
       max-width: 100%;
   }
 
-  .side-bar {
+  .nav-bar {
       display: flex;
       gap: 20px;
       justify-content: center;
