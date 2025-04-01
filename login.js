@@ -45,3 +45,7 @@ submit.addEventListener('click', function (event) {
 
 })
 
+window.addEventListener("load", function() {
+  document.getElementById("loader").style.display = "none"; // Hide the loader
+});
+

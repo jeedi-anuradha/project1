@@ -8,22 +8,28 @@
     <script type="module" src="login.js" defer></script>
 </head>
 <body>
+
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+    </div>
+
     <div class="background">
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
     <div class="container">
-        <form action="">
-            <h3>Login here</h3>
-            <label for="username">Username</label><br>
-            <input type="text" id="username" placeholder="Email or Phone Number" autocomplete="off"><br>
-            <label for="password">Password</label><br>
-            <input type="password" id="password" placeholder="password"><br>
-            <button id="login">LOGIN HERE</button>
-            <span>New To AV Bookstore</span>
-            <a href="./register.html">Sign Up</a>
-            <a href="../books/index.html" id="p">GUEST LOGIN</a>
-        </form>
+        <form id="login-form">
+    <h3>Login here</h3>
+    <label for="username">Username</label><br>
+    <input type="text" id="username" placeholder="Email or Phone Number" autocomplete="off"><br>
+    <label for="password">Password</label><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button id="login">LOGIN HERE</button>
+    <span>New To AV Bookstore</span>
+    <a href="./register.html">Sign Up</a>
+    <a href="../books/index.html" id="p">GUEST LOGIN</a>
+</form>
+
     </div>
 </body>
 </html>

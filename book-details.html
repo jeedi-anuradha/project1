@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details</title>
-    <style>
+    <link rel="stylesheet" href="./book-details.css">
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
@@ -56,117 +57,45 @@
         .star.selected {
             color: gold; /* Color for selected stars */
         }
-    </style>
+    </style> -->
 </head>
 <body>
+    <div id="loader" class="loader"></div>
+    
     <div id="book-detail">
-        <img id="book-image" alt="Book Image">
         <h1 id="book-title"></h1>
         <p id="book-author"></p>
+        <img id="book-image" alt="Book Image">
+        <p id="book-price"></p>
+        
         <p id="book-description"></p>
+        
+        <button id="add-to-cart">Add to Cart</button>
+        <h3>Rating</h3>
         <div class="rating-holder" id="rating-holder">
+            
             <span class="star" data-value="1">★</span>
             <span class="star" data-value="2">★</span>
             <span class="star" data-value="3">★</span>
             <span class="star" data-value="4">★</span>
             <span class="star" data-value="5">★</span>
         </div>
-        <button id="add-to-cart">Add to Cart</button>
+
+        <div id="reviews">
+            <h3>Reviews</h3>
+            <div id="review-list"></div>
+            
+            <!-- Add Review Form -->
+            <div id="add-review">
+                <h4>Add a Review</h4>
+                <textarea id="review-comment" placeholder="Write your review..."></textarea>
+                <button id="submit-review">Submit Review</button>
+            </div>
+        </div>
+    </div>    
     </div>
 
-    <script>
-        // Get book ID from the URL query string
-        const urlParams = new URLSearchParams(window.location.search);
-        const bookId = parseInt(urlParams.get('id'));  // Retrieve the book ID from URL
-
-        if (isNaN(bookId)) {
-            document.getElementById('book-detail').innerHTML = '<p>No book found</p>';
-        }
-
-        // Load books data from localStorage
-        let books = JSON.parse(localStorage.getItem('books')) || [];
-
-        // Find the book by ID
-        let book = books.find(b => b.id === bookId);
-        console.log("book id is " + bookId);
-
-        if (book) {
-            // Display the book details
-            document.getElementById('book-image').src = book.bookImage;  // Set the book image
-            document.getElementById('book-title').textContent = book.bookTitle;  // Set the title
-            document.getElementById('book-author').textContent = `Author: ${book.bookAuthor}`;  // Set the author
-            document.getElementById('book-description').textContent = book.bookDescription || 'No description available.';  // Set the description
-
-            // Display average rating
-            displayRating(book);
-        } else {
-            document.getElementById('book-detail').innerHTML = '<p>Book not found</p>';
-        }
-
-        // Add the book to cart functionality
-        document.getElementById('add-to-cart').addEventListener('click', function() {
-            addToCart(bookId);
-        });
-
-        // Function to add book to cart
-        function addToCart(bookId) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let bookInCart = cart.find(item => item.id === bookId);
-
-            if (!bookInCart) {
-                let book = books.find(b => b.id === bookId);
-                if (book) {
-                    cart.push({
-                        id: book.id,
-                        bookTitle: book.bookTitle
-                    });
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                    alert(`${book.bookTitle} added to cart`);
-                }
-            } else {
-                alert(`${book.bookTitle} is already in the cart.`);
-            }
-        }
-
-        // Function to display average rating
-        function displayRating(book) {
-            const ratingHolder = document.getElementById('rating-holder');
-            const stars = ratingHolder.getElementsByClassName('star');
-            const averageRating = book.ratings ? (book.ratings.reduce((a, b) => a + b) / book.ratings.length).toFixed(1) : 0;
-
-            // Highlight the stars based on average rating
-            for (let i = 0; i < stars.length; i++) {
-                stars[i].classList.remove('selected');
-                if (i < averageRating) {
-                    stars[i].classList.add('selected');
-                }
-            }
-        }
-
-        // Add click event to stars for rating
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = parseInt(this.dataset.value);
-                rateBook(bookId, rating);
-                displayRating(books.find(b => b.id === bookId)); // Refresh the displayed rating
-            });
-        });
-
-        // Function to rate the book
-        function rateBook(bookId, rating) {
-            let books = JSON.parse(localStorage.getItem('books')) || [];
-            let book = books.find(b => b.id === bookId);
-
-            // Initialize ratings array if it doesn't exist
-            if (!book.ratings) {
-                book.ratings = [];
-            }
-
-            // Add new rating and save back to localStorage
-            book.ratings.push(rating);
-            localStorage.setItem('books', JSON.stringify(books));
-        }
+    <script src="./book-details.js">
     </script>
 </body>
 </html>

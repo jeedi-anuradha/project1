@@ -60,6 +60,7 @@ function bestSeller() {
             <div class="rating-holder" data-book-id="${book.id}">  
                 ${getStars(book)} 
             </div>
+            
             <button class="add-to-cart" data-product="${book.id}">Add to cart</button>
         `;
         bestSellar.appendChild(rankItem);
