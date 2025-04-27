@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
     <link rel="stylesheet" href="login.css">
-    <script type="module" src="login.js" defer></script>
+    <script type="module" src="login2.js" defer></script>
 </head>
 <body>
 
@@ -18,16 +18,28 @@
         <div class="shape"></div>
     </div>
     <div class="container">
-        <form id="login-form">
+        <form id="login-form" onsubmit="return validateForm(event)">
     <h3>Login here</h3>
     <label for="username">Username</label><br>
-    <input type="text" id="username" placeholder="Email or Phone Number" autocomplete="off"><br>
+    <input 
+        type="text" 
+        id="username" 
+        placeholder=" Enter Username or email" 
+        autocomplete="off"
+        required
+        ><br>
+    <div id="username-error" class="error-message"></div>
     <label for="password">Password</label><br>
-    <input type="password" id="password" placeholder="Password"><br>
-    <button id="login">LOGIN HERE</button>
+    <input 
+        type="password" 
+        id="password" 
+        placeholder="Password"
+        required><br>
+    <div id="password-error" class="error-message"></div>
+    <button id="login" type="submit">LOGIN HERE</button>
     <span>New To AV Bookstore</span>
     <a href="./register.html">Sign Up</a>
-    <a href="../books/index.html" id="p">GUEST LOGIN</a>
+    <a href="./index.html" id="p">GUEST LOGIN</a>
 </form>
 
     </div>

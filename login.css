@@ -21,7 +21,7 @@ body {
     height: 100vh;
 }
 .background {
-    background-image: url("../images/background-img.jpg");
+    background-image: url("./background-img.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
@@ -219,4 +219,11 @@ form #p:hover{
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 5px;
   }

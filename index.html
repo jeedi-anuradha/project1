@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no" />
     <title>book store</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -50,7 +50,7 @@
         <a href="#best-seller">Best-Sellers</a>
         <a href="#new-arrivels">New Arrivals</a>
         <a href="#trend">Trending</a>
-        <a href="../project/index.html">Logout</a>
+        <a href="./landing.html">Logout</a>
       </div>
       <div class="cart">
         <ion-icon
@@ -180,7 +180,7 @@
       </div>
     </footer>
     <!-- Footer End -->
-    <script src="./landing.js"></script>
+    <script src="./index.js"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -192,36 +192,51 @@
       crossorigin="anonymous"
     ></script>
     <script>
+      // Replace your current script with this:
+document.addEventListener('DOMContentLoaded', function() {
+  const loader = document.getElementById('loader');
+  const body = document.body;
+  
+  // Show loader immediately
+  loader.style.display = 'flex';
+  
+  // Wait for all resources to load
+  window.addEventListener('load', function() {
+    // Add slight delay for better UX (optional)
+    setTimeout(function() {
+      // Hide loader with fade effect
+      loader.classList.add('hidden');
       
-// Menu toggle functionality
-document.getElementById('close-btn').addEventListener('click', closeMenu);
+      // Remove loader from DOM after animation completes
+      setTimeout(function() {
+        loader.style.display = 'none';
+        body.classList.add('content-loaded');
+      }, 1000); // Match this with the CSS transition time
+    }, 1000); // Additional delay to ensure everything is loaded
+  });
+  
+  // Your existing menu toggle code can remain
+  document.getElementById('close-btn').addEventListener('click', closeMenu);
+});
 
 function toggleMenu() {
   const navBar = document.querySelector('.nav-bar');
   navBar.classList.toggle('show');
 }
 
-// Function to close the navigation menu when a link is clicked
 function closeMenu() {
   const navBar = document.querySelector('.nav-bar');
   navBar.classList.remove('show');
 }
 
-// Add event listener to close button
-document.getElementById('close-btn').addEventListener('click', closeMenu);
-
-// Optional: Close the nav bar if the user clicks outside the nav bar
 document.addEventListener('click', function(event) {
   const navBar = document.querySelector('.nav-bar');
   const menubar = document.querySelector('.menubar');
   
-  // Check if the click is outside the nav bar and hamburger menu
   if (!navBar.contains(event.target) && !menubar.contains(event.target)) {
     navBar.classList.remove('show');
   }
 });
-
-
     </script>
   </body>
 </html>

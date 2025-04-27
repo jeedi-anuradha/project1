@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>landing</title>
+    <link rel="stylesheet" href="./landingstyle.css" />
+    
+    <!--font-awesome cdn-->
+  </head>
+  <body>
+    <header id="home">
+      <nav class="navbar">
+        <div class="logo">
+          <h4>AV books</h4>
+        </div>
+        <div class="menubar">
+            <ion-icon name="menu-outline" id="menu-icon"></ion-icon>
+          </div>
+        <div class="navmenu">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="../books/login.html">Login</a></li>
+          </ul>
+          
+          <div class="search-box">
+            <input
+              type="search"
+              class="search"
+              id="search"
+              placeholder="search here..."
+            />
+            <ul id="result"></ul>
+            <ion-icon name="search-outline" class="icon"></ion-icon>
+          </div>
+        </div>
+      </nav>
+
+      <div class="main-header">
+        <h5>AV Books</h5>
+        <h2>For All Your Reading Needs</h2>
+        <p>
+          Our website provides variety of books based on categories,author,best
+          seller,new arrivals and trending books
+        </p>
+        <a href="./login.html" class="btn">Read More</a>
+      </div>
+    </header>
+    <div class="main-container">
+      <!-- <div class="loader">Loading books...</div> -->
+    </div>
+    <section class="categories" id="categories">
+      <div class="cat-row">
+        <div class="cat-header">
+          <h2>Popular Categories</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde
+            voluptatum itaque dolorum omnis Magnam incidunt illum eos
+            blanditiis!
+          </p>
+        </div>
+        <div class="cat-books">
+          <div class="books">
+            <div class="book-img">
+              <a href="./login.html" onclick="alert('Login to see fantasy books')">
+                <img src="../images/fantasy-img.jpg" alt="fantasy" />
+              </a>
+            </div>
+            <h4>Fantasy</h4>
+          </div>
+          <div class="books">
+            <div class="book-img">
+              <a href="./login.html" onclick="alert('Login to see fiction books')">
+                <img src="../images/fiction2.jpg" alt="fiction" />
+              </a>
+            </div>
+            <h4>Fiction</h4>
+          </div>
+          <div class="books">
+            <div class="book-img">
+              <a href="./login.html" onclick="alert('Login to see Thriller books')">
+                <img src="../images/thriller.jpg" alt="thriller" />
+              </a>
+            </div>
+            <h4>Thriller</h4>
+          </div>
+          <div class="books">
+            <div class="book-img">
+              <a href="./login.html" onclick="alert('Login to see history books')">
+                <img src="../images/history-img.jpg" alt="history" />
+              </a>
+            </div>
+            <h4>History</h4>
+          </div>
+          <div class="books">
+            <div class="book-img">
+              <a href="./login.html" onclick="alert('Login to see memoir books')">
+                <img src="../images/memoir.jpeg" alt="memoir" />
+              </a>
+            </div>
+            <h4>Memoir</h4>
+          </div>
+          <div class="books">
+            <div class="book-img">
+              <a href="./login.html" onclick="alert('Login to see Romance books')">
+                <img src="../images/romance-img.jpg" alt="romance" />
+              </a>
+            </div>
+            <h4>Romance</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About section -->
+    <section id="about">
+      <div class="set-row">
+        <img src="../images/about.jpg" alt="about" />
+        <div class="about-content">
+          <h2>About Our Bookstore</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+            dicta pariatur architecto sequi.
+          </p>
+          <a href="./login.html" class="btn2">Read More</a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h1>Featured Authors</h1>
+      <div class="author">
+        <img src="../images/author 1.jpg" alt="" />
+        <img src="../images/author 2.jpg" alt="" />
+        <img src="../images/author 3.jpg" alt="" />
+        <img src="../images/author 4.jpg" alt="" />
+        <img src="../images/author 5.jpg" alt="" />
+        <img src="../images/author 6.jpg" alt="" />
+        <img src="../images/author 7.jpg" alt="" />
+        <img src="../images/author 8.jpg" alt="" />
+        <img src="../images/author 9.jpg" alt="" />
+        <img src="../images/author 10.jpg" alt="" />
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="contact-row">
+        <div class="col">
+          <h2>Contact Us</h2>
+          <form action="">
+            <input type="text" placeholder="Name" /><br />
+            <input type="text" placeholder="Email" /><br />
+            <input type="text" placeholder="Phone Number" /><br />
+            <textarea
+              cols="20"
+              rows="5"
+              placeholder="Message"
+              id="text-area"
+            ></textarea
+            ><br />
+            <input type="submit" value="SEND" />
+          </form>
+        </div>
+        <div class="col">
+          <img src="../images/ContactUs_3.jpg" alt="" />
+        </div>
+      </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+          <div class="footer-column">
+            <h5>About Us</h5>
+            <p>
+              Our website provides variety of books based on categories, author,
+              best sellers, new arrivals, and trending books.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+              <li><a href="#">Login</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h5>Follow Us</h5>
+            <div class="social-links">
+              <a href="#"><ion-icon name="logo-facebook"></ion-icon> Facebook</a>
+              <a href="#"><ion-icon name="logo-twitter"></ion-icon> Twitter</a>
+              <a href="#"
+                ><ion-icon name="logo-instagram"></ion-icon> Instagram</a
+              >
+              <a href="#"><ion-icon name="logo-youtube"></ion-icon> YouTube</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Your Bookstore. All Rights Reserved.</p>
+        </div>
+      </footer>
+    <script src="./landing.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script>
+      const menuIcon = document.getElementById("menu-icon");
+      // const closeIcon = document.getElementById('close-icon');
+      const navMenu = document.querySelector(".navmenu");
+
+      menuIcon.onclick = () => {
+        menuIcon.classList.toggle("bx-x");
+        navMenu.classList.toggle("open");
+      };
+
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".menubar") && !e.target.closest(".navmenu")) {
+          navMenu.classList.remove("open");
+          menuIcon.classList.remove("bx-x");
+        }
+      });
+    </script>
+    <script src="./index.js"></script>
+  </body>
+</html>

@@ -2,10 +2,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAbi9uPTie3mPIJjmSaQXrZ4cZJvcL1rVQ",
@@ -20,37 +16,42 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-
-//submit button
-const submit = document.getElementById('login')
+// Submit button listener
+const submit = document.getElementById('login');
 submit.addEventListener('click', function (event) {
   event.preventDefault();
-  //Inputs
+
+  // First, validate the form
+  const formIsValid = validateForm(event);
+  if (!formIsValid) return;  // If the form is not valid, do not proceed
+
+  // Inputs
   const email = document.getElementById('username').value;
   const password = document.getElementById('password').value;
+
+  // Firebase sign-in
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed up 
+      // Login success
       const user = userCredential.user;
-      alert('login success')
-      window.location.href='index.html';
-      // ...
+      alert('Login success');
+      window.location.href = 'index.html';
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage)
-      // ..
+      alert(errorMessage);
     });
+});
 
-})
-
+// Hide the loader when the page is loaded
 window.addEventListener("load", function() {
   document.getElementById("loader").style.display = "none"; // Hide the loader
 });
 
+// Validate the form
 function validateForm(event) {
-  // Prevent form submission by default
+  // Prevent form submission by default (handled by the submit button)
   event.preventDefault();
 
   // Get the values from the form fields
@@ -65,26 +66,28 @@ function validateForm(event) {
 
   // Validate Username (Ensure it's not empty and matches a basic email pattern)
   if (username === '') {
-      document.getElementById('username-error').innerText = 'Username cannot be empty.';
-      isValid = false;
+    document.getElementById('username-error').innerText = 'Username cannot be empty.';
+    document.getElementById('username-error').style.color = 'red';
+    isValid = false;
   } else if (!validateEmail(username)) {
-      document.getElementById('username-error').innerText = 'Please enter a valid email.';
-      isValid = false;
+    document.getElementById('username-error').innerText = 'Please enter a valid email.';
+    document.getElementById('username-error').style.color = 'orange'; 
+    isValid = false;
   }
 
   // Validate Password (Ensure it's not empty and meets a minimum length)
   if (password === '') {
-      document.getElementById('password-error').innerText = 'Password cannot be empty.';
-      isValid = false;
+    document.getElementById('password-error').innerText = 'Password cannot be empty.';
+    document.getElementById('password-error').style.color = 'red'; 
+    isValid = false;
   } else if (password.length < 6) {
-      document.getElementById('password-error').innerText = 'Password must be at least 6 characters long.';
-      isValid = false;
+    document.getElementById('password-error').innerText = 'Password must be at least 6 characters long.';
+    document.getElementById('password-error').style.color = 'orange'; 
+    isValid = false;
   }
 
-  // If form is valid, submit the form
-  if (isValid) {
-      document.getElementById('login-form').submit();
-  }
+  // Return the validity of the form
+  return isValid;
 }
 
 // Function to validate email pattern
@@ -92,3 +95,6 @@ function validateEmail(email) {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   return emailPattern.test(email);
 }
+
+document.getElementById('username-error').classList.add('error-message');
+document.getElementById('password-error').classList.add('error-message');

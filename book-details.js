@@ -108,7 +108,7 @@ async function fetchBookDetails() {
     document.getElementById('book-author').innerText = `By ${book.bookAuthor}`;
     document.getElementById('book-image').src = book.bookImage;
     document.getElementById('book-description').innerText = book.bookDescription;
-    document.getElementById('book-price').innerText = ` INR ${book.bookPrice}`
+    document.getElementById('book-price').innerText = ` ₹ ${book.bookPrice}`
 
     // Display reviews
     displayReviews(book);
