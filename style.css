@@ -354,15 +354,31 @@ header {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.4s ease;
+  margin: 5px;
 }
 
 #btn-container button:hover {
   background-color: var(--third-color);
   color: var(--secondary-color);
 }
+
+#btn-container button.active {
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+#btn-container button:hover:not(.active) {
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+}
+#btn-container button.active:hover {
+  background-color: var(--third-color);
+  color: var(--secondary-color);
+  opacity: 0.9; /* Slight visual feedback on hover */
+}
 /* Book Container and Item Styling */
 .main-container, #best-seller, #new-arrivels, #trend {
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -432,6 +448,8 @@ footer {
 .footer-column p, .footer-column ul, .footer-column a {
   font-size: 1rem;
   line-height: 1.5;
+  text-decoration: none;
+  color: #ffff;
 }
 
 .social-links a {

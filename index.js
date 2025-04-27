@@ -18,7 +18,7 @@ async function fetchData() {
 
 // Function to display categories
 function displayCategories() {
-    let books = JSON.parse(localStorage.getItem("books"));
+     let books = JSON.parse(localStorage.getItem("books"));
     let category = books.map(product => product.bookCategory);
     let set = new Set(category);
     let categoryArr = Array.from(set);
@@ -26,12 +26,14 @@ function displayCategories() {
     let catHeading = document.createElement('h3');
     catHeading.id="catHead"
     catHeading.innerText = 'Categories';
+    btncontainer.innerHTML = ''; // Clear existing content
     btncontainer.appendChild(catHeading);
     btncontainer.appendChild(document.createElement('br'));
-    categoryArr.forEach(category => {
+    
+    categoryArr.forEach((category) => {
         let button = document.createElement('button');
         button.textContent = category;
-        button.onclick = () => {
+        button.onclick = (e) => {
             filterData(category);
         }
         btncontainer.appendChild(button);
@@ -150,6 +152,14 @@ function trending() {
 
 // Function to filter data based on category
 function filterData(category) {
+    // Remove active class from all buttons
+    document.querySelectorAll('#btn-container button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Add active class to the clicked button
+    event.target.classList.add('active');
+    
     let products = JSON.parse(localStorage.getItem('books')) || [];
     let filteredData = products.filter(book => book.bookCategory == category);
     displayData(filteredData);
